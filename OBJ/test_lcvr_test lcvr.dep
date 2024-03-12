@@ -23,7 +23,7 @@ I (.\BOARD\key\key.h)(0x55053404)
 I (.\BOARD\encoder\encoder.h)(0x550533B0)
 I (.\BOARD\I2C\iic.h)(0x550260BA)
 I (.\BOARD\24CXX\_24cxx.h)(0x55053566)
-I (.\BOARD\spi\spi.h)(0x64FC86FF)
+I (.\BOARD\spi\spi.h)(0x64FC8D39)
 I (.\BOARD\tft\tft.h)(0x591532F4)
 I (E:\Keil_v5\ARM\ARMCC\include\stdio.h)(0x5F63877C)
 I (.\SYSTEM\usart\usart.h)(0x64F0BB12)
@@ -291,8 +291,8 @@ I (.\STM32F10x_FWLib\inc\stm32f10x_tim.h)(0x4D783BB4)
 I (.\STM32F10x_FWLib\inc\stm32f10x_usart.h)(0x4D783BB4)
 I (.\STM32F10x_FWLib\inc\misc.h)(0x4D783BB4)
 I (.\SYSTEM\delay\delay.h)(0x54FB10CC)
-F (.\BOARD\spi\spi.c)(0x64FC878F)(-c --cpu Cortex-M3 -D__MICROLIB -g -O0 --apcs=interwork -I .\CORE -I .\USER -I .\STM32F10x_FWLib\inc -I .\SYSTEM\delay -I .\SYSTEM\sys -I .\SYSTEM\usart -I .\BOARD\led -I .\BOARD\key -I .\BOARD\tft -I .\BOARD\encoder -I .\BOARD\TIM -I .\BOARD\I2C -I .\BOARD\24CXX -I .\BOARD\spi-I.\RTE\_test_lcvr-IE:\Keil_v5\ARM\PACK\ARM\CMSIS\5.7.0\CMSIS\Core\Include-IE:\Keil_v5\ARM\PACK\Keil\STM32F1xx_DFP\2.4.0\Device\Include-D__UVISION_VERSION="532" -D_RTE_ -DSTM32F10X_MD -D_RTE_ -DSTM32F10X_MD -DUSE_STDPERIPH_DRIVER-o .\obj\spi.o --omf_browse .\obj\spi.crf --depend .\obj\spi.d)
-I (BOARD\spi\spi.h)(0x64FC86FF)
+F (.\BOARD\spi\spi.c)(0x64FC9022)(-c --cpu Cortex-M3 -D__MICROLIB -g -O0 --apcs=interwork -I .\CORE -I .\USER -I .\STM32F10x_FWLib\inc -I .\SYSTEM\delay -I .\SYSTEM\sys -I .\SYSTEM\usart -I .\BOARD\led -I .\BOARD\key -I .\BOARD\tft -I .\BOARD\encoder -I .\BOARD\TIM -I .\BOARD\I2C -I .\BOARD\24CXX -I .\BOARD\spi-I.\RTE\_test_lcvr-IE:\Keil_v5\ARM\PACK\ARM\CMSIS\5.7.0\CMSIS\Core\Include-IE:\Keil_v5\ARM\PACK\Keil\STM32F1xx_DFP\2.4.0\Device\Include-D__UVISION_VERSION="532" -D_RTE_ -DSTM32F10X_MD -D_RTE_ -DSTM32F10X_MD -DUSE_STDPERIPH_DRIVER-o .\obj\spi.o --omf_browse .\obj\spi.crf --depend .\obj\spi.d)
+I (BOARD\spi\spi.h)(0x64FC8D39)
 I (.\SYSTEM\sys\sys.h)(0x54FD4DA4)
 I (.\USER\stm32f10x.h)(0x4D783CB4)
 I (.\CORE\core_cm3.h)(0x4D523B58)

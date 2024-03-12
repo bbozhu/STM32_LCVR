@@ -5,20 +5,20 @@
 #include "delay.h"
 
 //硬件端口定义
-#define DA_CS1 PCout(6)		//DA chip select
-#define ADA_SCK1 PBout(15)	//AD&DA clock
-#define DA_SDI1 PBout(14)		//DA data input
-#define DA_SDO1 PBin(13)		//DA data output
-#define AD_SDO1 PBin(12)		//AD data output
-#define AD_CS1	PCout(7)		//AD chip select
+#define DA_CS2 PBout(10)		//DA chip select
+#define ADA_SCK2 PBout(1)	//AD&DA clock
+#define DA_SDI2 PBout(0)		//DA data input
+#define DA_SDO2 PCin(5)		//DA data output
+#define AD_SDO2 PCin(4)		//AD data output
+#define AD_CS2	PBout(11)		//AD chip select
 
 ////硬件端口定义
-//#define DA_CS PCout(6)		//DA chip select
-//#define ADA_SCK PBout(15)	//AD&DA clock
-//#define DA_SDI PBout(14)		//DA data input
-//#define DA_SDO PBin(13)		//DA data output
-//#define AD_SDO PBin(12)		//AD data output
-//#define AD_CS	PCout(7)		//AD chip select
+//#define DA_CS2 PCout(6)		//DA chip select
+//#define ADA_SCK2 PBout(15)	//AD&DA clock
+//#define DA_SDI2 PBout(14)		//DA data input
+//#define DA_SDO2 PBin(13)		//DA data output
+//#define AD_SDO2 PBin(12)		//AD data output
+//#define AD_CS2	PCout(7)		//AD chip select
 
 //AD5422寄存器定义
 #define AD5422_NOP_Reg_Addr (u8)0
