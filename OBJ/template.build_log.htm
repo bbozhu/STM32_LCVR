@@ -1,0 +1,113 @@
+<html>
+<body>
+<pre>
+<h1>礦ision Build Log</h1>
+<h2>Tool Versions:</h2>
+IDE-Version: μVision V5.32.0.0
+Copyright (C) 2020 ARM Ltd and ARM Germany GmbH. All rights reserved.
+License Information: 123 1546925483@qq.com, 123, LIC=HN0AE-58E2A-63LMB-2159R-DUAXL-494C8
+ 
+Tool Versions:
+Toolchain:       MDK-ARM Plus  Version: 5.32.0.0
+Toolchain Path:  E:\Keil_v5\ARM\ARMCC\Bin
+C Compiler:      Armcc.exe V5.06 update 7 (build 960)
+Assembler:       Armasm.exe V5.06 update 7 (build 960)
+Linker/Locator:  ArmLink.exe V5.06 update 7 (build 960)
+Library Manager: ArmAr.exe V5.06 update 7 (build 960)
+Hex Converter:   FromElf.exe V5.06 update 7 (build 960)
+CPU DLL:         SARMCM3.DLL V5.32.0.0
+Dialog DLL:      DCM.DLL V1.17.3.0
+Target DLL:      Segger\JL2CM3.dll V2.99.38.0
+Dialog DLL:      TCM.DLL V1.46.0.0
+ 
+<h2>Project:</h2>
+C:\Users\15469\Desktop\STM32_lcvr\lcvr 1.0\test_lcvr.uvprojx
+Project File Date:  09/09/2023
+
+<h2>Output:</h2>
+*** Using Compiler 'V5.06 update 7 (build 960)', folder: 'E:\Keil_v5\ARM\ARMCC\Bin'
+Rebuild target 'test lcvr'
+assembling startup_stm32f10x_md.s...
+compiling system_stm32f10x.c...
+compiling stm32f10x_usart.c...
+compiling main.c...
+USER\main.c(64): warning:  #167-D: argument of type "int8_t *" is incompatible with parameter of type "u8 *"
+  		AT24CXX_Read(0,((int8_t *)&g_KpE),len);
+USER\main.c(66): warning:  #167-D: argument of type "int8_t *" is incompatible with parameter of type "u8 *"
+  		AT24CXX_Read(len,((int8_t *)&g_KiE),len);
+USER\main.c(68): warning:  #167-D: argument of type "int8_t *" is incompatible with parameter of type "u8 *"
+  		AT24CXX_Read(len*2,((int8_t *)&g_KdE),len);
+USER\main.c(70): warning:  #167-D: argument of type "int8_t *" is incompatible with parameter of type "u8 *"
+  		AT24CXX_Read(len*3,((int8_t *)&g_SvE),len);
+USER\main.c(107): warning:  #167-D: argument of type "int8_t *" is incompatible with parameter of type "u8 *"
+  	AT24CXX_Write(0,((int8_t *)&g_KpE),MY_floatE_LEN+2);
+USER\main.c(108): warning:  #167-D: argument of type "int8_t *" is incompatible with parameter of type "u8 *"
+  	AT24CXX_Write(len,((int8_t *)&g_KiE),MY_floatE_LEN+2);
+USER\main.c(109): warning:  #167-D: argument of type "int8_t *" is incompatible with parameter of type "u8 *"
+  	AT24CXX_Write(len*2,((int8_t *)&g_KdE),MY_floatE_LEN+2);
+USER\main.c(110): warning:  #167-D: argument of type "int8_t *" is incompatible with parameter of type "u8 *"
+  	AT24CXX_Write(len*3,((int8_t *)&g_SvE),MY_floatE_LEN+2);
+USER\main.c(152): warning:  #177-D: variable "t"  was declared but never referenced
+  	float t;
+USER\main.c(268): warning:  #181-D: argument is incompatible with corresponding format string conversion
+  			printf("delta:%d\r\n",delta);
+USER\main.c: 10 warnings, 0 errors
+compiling stm32f10x_it.c...
+compiling core_cm3.c...
+compiling stm32f10x_exti.c...
+compiling stm32f10x_gpio.c...
+compiling stm32f10x_dma.c...
+compiling misc.c...
+compiling stm32f10x_rcc.c...
+compiling stm32f10x_tim.c...
+compiling delay.c...
+compiling sys.c...
+compiling usart.c...
+compiling key.c...
+compiling font.c...
+compiling encoder.c...
+compiling tft.c...
+compiling timer.c...
+compiling led.c...
+compiling _24cxx.c...
+compiling spi.c...
+compiling iic.c...
+BOARD\I2C\iic.c(51): warning:  #61-D: integer operation result is out of range
+  	SDA_IN();      //SDA设置为输入  
+BOARD\I2C\iic.c(51): warning:  #68-D: integer conversion resulted in a change of sign
+  	SDA_IN();      //SDA设置为输入  
+BOARD\I2C\iic.c(116): warning:  #61-D: integer operation result is out of range
+  	SDA_IN();//SDA设置为输入
+BOARD\I2C\iic.c(116): warning:  #68-D: integer conversion resulted in a change of sign
+  	SDA_IN();//SDA设置为输入
+BOARD\I2C\iic.c: 4 warnings, 0 errors
+linking...
+Program Size: Code=21098 RO-data=1790 RW-data=464 ZI-data=2408  
+FromELF: creating hex file...
+".\OBJ\template.axf" - 0 Error(s), 14 Warning(s).
+
+<h2>Software Packages used:</h2>
+
+Package Vendor: ARM
+                http://www.keil.com/pack/ARM.CMSIS.5.7.0.pack
+                ARM.CMSIS.5.7.0
+                CMSIS (Cortex Microcontroller Software Interface Standard)
+   * Component: CORE Version: 5.4.0
+
+Package Vendor: Keil
+                http://www.keil.com/pack/Keil.STM32F1xx_DFP.2.4.0.pack
+                Keil.STM32F1xx_DFP.2.4.0
+                STMicroelectronics STM32F1 Series Device Support, Drivers and Examples
+
+<h2>Collection of Component include folders:</h2>
+  .\RTE\_test_lcvr
+  E:\Keil_v5\ARM\PACK\ARM\CMSIS\5.7.0\CMSIS\Core\Include
+  E:\Keil_v5\ARM\PACK\Keil\STM32F1xx_DFP\2.4.0\Device\Include
+
+<h2>Collection of Component Files used:</h2>
+
+   * Component: ARM::CMSIS:CORE:5.4.0
+Build Time Elapsed:  00:00:02
+</pre>
+</body>
+</html>
