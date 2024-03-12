@@ -14,3 +14,5 @@
 .\obj\spi.o: .\STM32F10x_FWLib\inc\stm32f10x_usart.h
 .\obj\spi.o: .\STM32F10x_FWLib\inc\misc.h
 .\obj\spi.o: .\SYSTEM\delay\delay.h
+.\obj\spi.o: .\SYSTEM\usart\usart.h
+.\obj\spi.o: E:\Keil_v5\ARM\ARMCC\Bin\..\include\stdio.h

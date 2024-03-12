@@ -1,4 +1,5 @@
 #include "spi.h"
+#include "usart.h"
 
 ////硬件端口定义
 //#define DA_CS2 PBout(10)		//DA chip select
@@ -15,7 +16,7 @@ void SPI_Init(void)
 	RCC_APB2PeriphClockCmd(RCC_APB2Periph_GPIOB|RCC_APB2Periph_GPIOC,ENABLE);		
 	
 	//2-AD DA spi通信	
-		GPIO_InitStruct.GPIO_Pin=GPIO_Pin_10|GPIO_Pin_1|GPIO_Pin_0;//1-DA_SDI(PB0)、1-ADA_SCK(PB1)、1-DA_CS(PB10)
+	GPIO_InitStruct.GPIO_Pin=GPIO_Pin_10|GPIO_Pin_1|GPIO_Pin_0;//1-DA_SDI(PB0)、1-ADA_SCK(PB1)、1-DA_CS(PB10)
 	GPIO_InitStruct.GPIO_Speed=GPIO_Speed_50MHz;
 	GPIO_InitStruct.GPIO_Mode=GPIO_Mode_Out_PP;
 	GPIO_Init(GPIOB,&GPIO_InitStruct);
@@ -36,32 +37,32 @@ void SPI_Init(void)
 	GPIO_ResetBits(GPIOB,GPIO_Pin_10);//1-DA_CS(PB10)set to be low
 	GPIO_ResetBits(GPIOB,GPIO_Pin_11);//1-AD_CS(PB111)set to be low
 
-//		//1-AD DA spi通信	
-//		GPIO_InitStruct.GPIO_Pin=GPIO_Pin_14|GPIO_Pin_15;//1-DA_SDI(PB14)、1-ADA_SCK(PB15)
-//		GPIO_InitStruct.GPIO_Speed=GPIO_Speed_50MHz;
-//		GPIO_InitStruct.GPIO_Mode=GPIO_Mode_Out_PP;
-//		GPIO_Init(GPIOB,&GPIO_InitStruct);
-//		
-//		GPIO_InitStruct.GPIO_Pin=GPIO_Pin_6;//1-DA_CS(PC6)
-//		GPIO_InitStruct.GPIO_Speed=GPIO_Speed_50MHz;
-//		GPIO_InitStruct.GPIO_Mode=GPIO_Mode_Out_PP;
-//		GPIO_Init(GPIOC,&GPIO_InitStruct);
-//		
-//		GPIO_InitStruct.GPIO_Pin=GPIO_Pin_7;//1-AD_CS(PC7)
-//		GPIO_Init(GPIOC,&GPIO_InitStruct);
-//		
-//		GPIO_InitStruct.GPIO_Mode=GPIO_Mode_IN_FLOATING;
-//		
-//		GPIO_InitStruct.GPIO_Pin=GPIO_Pin_13;//1-DA_SDO(PB13)
-//		GPIO_Init(GPIOB,&GPIO_InitStruct);
-//		
-//		GPIO_InitStruct.GPIO_Pin=GPIO_Pin_12;//1-AD_SDO(PB12)
-//		GPIO_Init(GPIOB,&GPIO_InitStruct);
-//		
-//		GPIO_SetBits(GPIOB,GPIO_Pin_15);//1-ADA_SCK(PB15)set to be high
-//		GPIO_ResetBits(GPIOB,GPIO_Pin_14);//1-DA_SDI(PB14)、1-DA_CS(PC6)set to be low
-//		GPIO_ResetBits(GPIOC,GPIO_Pin_6);//1-DA_CS(PC6)set to be low
-//		GPIO_ResetBits(GPIOC,GPIO_Pin_7);//1-AD_CS(PC7)set to be low
+	//1-AD DA spi通信	
+	GPIO_InitStruct.GPIO_Pin=GPIO_Pin_14|GPIO_Pin_15;//1-DA_SDI(PB14)、1-ADA_SCK(PB15)
+	GPIO_InitStruct.GPIO_Speed=GPIO_Speed_50MHz;
+	GPIO_InitStruct.GPIO_Mode=GPIO_Mode_Out_PP;
+	GPIO_Init(GPIOB,&GPIO_InitStruct);
+	
+	GPIO_InitStruct.GPIO_Pin=GPIO_Pin_6;//1-DA_CS(PC6)
+	GPIO_InitStruct.GPIO_Speed=GPIO_Speed_50MHz;
+	GPIO_InitStruct.GPIO_Mode=GPIO_Mode_Out_PP;
+	GPIO_Init(GPIOC,&GPIO_InitStruct);
+	
+	GPIO_InitStruct.GPIO_Pin=GPIO_Pin_7;//1-AD_CS(PC7)
+	GPIO_Init(GPIOC,&GPIO_InitStruct);
+	
+	GPIO_InitStruct.GPIO_Mode=GPIO_Mode_IN_FLOATING;
+	
+	GPIO_InitStruct.GPIO_Pin=GPIO_Pin_13;//1-DA_SDO(PB13)
+	GPIO_Init(GPIOB,&GPIO_InitStruct);
+	
+	GPIO_InitStruct.GPIO_Pin=GPIO_Pin_12;//1-AD_SDO(PB12)
+	GPIO_Init(GPIOB,&GPIO_InitStruct);
+	
+	GPIO_SetBits(GPIOB,GPIO_Pin_15);//1-ADA_SCK(PB15)set to be high
+	GPIO_ResetBits(GPIOB,GPIO_Pin_14);//1-DA_SDI(PB14)、1-DA_CS(PC6)set to be low
+	GPIO_ResetBits(GPIOC,GPIO_Pin_6);//1-DA_CS(PC6)set to be low
+	GPIO_ResetBits(GPIOC,GPIO_Pin_7);//1-AD_CS(PC7)set to be low
 	
 }
 /*
@@ -74,11 +75,59 @@ void SPI_Init(void)
 #define AD_CS	PAout(0)		//AD chip select
 */
 
-u16 AD_SPI_Rd(void)//12us
+u16 AD_SPI_Rd(char SPI_Selectted)//12us
 {
 	u16 temp=0;
 	int8_t i;
-	AD_CS2=0;
+//	switch (SPI_Selectted)
+//	{
+//		case 1:
+//			DA_CS = DA_CS1
+//			ADA_SCK = DA_CS1
+//			DA_SDI = DA_CS1
+//			DA_SDO = DA_CS1
+//			AD_SDO = DA_CS1
+//			AD_CS	= DA_CS1
+//			break;
+//		case 2:
+//			DA_CS = DA_CS2
+//			ADA_SCK = DA_CS2
+//			DA_SDI = DA_CS2
+//			DA_SDO = DA_CS2
+//			AD_SDO = DA_CS2;
+//			AD_CS	= DA_CS2;
+//			break;
+//		default:
+//			break;
+//	}
+	
+	if (SPI_Selectted == 1 ) 
+		{
+			AD_CS1=0;
+	ADA_SCK1=1;
+//	Delay(1);
+	AD_CS1=1;
+	delay_us(1);
+	AD_CS1=0;
+//	Delay(1);
+	
+	if(AD_SDO1)
+		temp=temp|((u16)(1<<15));
+	
+	for(i=14;i>=0;i--)
+	{
+		ADA_SCK1=0;
+		if(AD_SDO1)
+		temp=temp|((u16)(1<<i));
+	//	Delay(1);
+		ADA_SCK1=1;
+	//	Delay(1);
+	}		
+			
+		} 
+		else 
+		{
+			AD_CS2=0;
 	ADA_SCK2=1;
 //	Delay(1);
 	AD_CS2=1;
@@ -98,14 +147,53 @@ u16 AD_SPI_Rd(void)//12us
 		ADA_SCK2=1;
 	//	Delay(1);
 	}		
+		}
+	
+	
 	return temp;
 }
 
-void DA_SPI_Wr(u8 addr,u16 data)//33us
+void DA_SPI_Wr(u8 addr,u16 data, char SPI_Selectted)//33us
 {
 	int8_t i;
-
-	ADA_SCK2=0;
+	
+		if (SPI_Selectted == 1 ) 
+		{
+		ADA_SCK1=0;
+	DA_CS1=0;
+	Delay(5);
+	
+	for(i=7;i>=0;i--)
+	{
+		if(addr&(1<<i))
+			DA_SDI1=1;
+		else
+			DA_SDI1=0;
+		ADA_SCK1=1;
+		Delay(1);
+		ADA_SCK1=0;
+		Delay(1);
+	}
+	
+	for(i=15;i>=0;i--)
+	{
+		if(data&(1<<i))
+			DA_SDI1=1;
+		else
+			DA_SDI1=0;
+		ADA_SCK1=1;
+		Delay(1);
+		ADA_SCK1=0;
+		Delay(1);
+	}
+	
+	DA_CS1=1;
+	Delay(5);
+	DA_CS1=0;
+		} 
+		else 
+		{
+			ADA_SCK2=0;
 	DA_CS2=0;
 	Delay(5);
 	
@@ -136,17 +224,20 @@ void DA_SPI_Wr(u8 addr,u16 data)//33us
 	DA_CS2=1;
 	Delay(5);
 	DA_CS2=0;
+		}
+	
+	
 }
 
 
 
-void DA_Wr(u16 data)
-{
-	DA_SPI_Wr(AD5422_DATA_Reg_Addr,data);
+void DA_Wr(u16 data, char SPI_Selectted)
+{	
+	DA_SPI_Wr(AD5422_DATA_Reg_Addr,data, SPI_Selectted);
 }
 
-void AD5422_Init(void)
+void AD5422_Init(char SPI_Selectted)
 {
-	DA_SPI_Wr(AD5422_RESET_Reg_Addr,0x0001);
-	DA_SPI_Wr(AD5422_CTRL_Reg_Addr,(u16)0x1002);//0x1000->0~5;0x1001->0~10;0x1002->+/-5;0x1003->+/-10
+	DA_SPI_Wr(AD5422_RESET_Reg_Addr,0x0001, SPI_Selectted);
+	DA_SPI_Wr(AD5422_CTRL_Reg_Addr,(u16)0x1002, SPI_Selectted);//0x1000->0~5;0x1001->0~10;0x1002->+/-5;0x1003->+/-10
 }

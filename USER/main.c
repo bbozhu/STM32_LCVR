@@ -23,7 +23,7 @@
 
 void PID_SetParams(void);
 void BubbleSort(u16 arr[],u8 len);
-u16 PD_Sampling(void);
+u16 PD_Sampling(char SPI_Selectted);
 void Control(void);
 void USRAT_send(u16 angle_tsend);
 void USART_Configuration(void);
@@ -133,12 +133,12 @@ void BubbleSort(u16 arr[],u8 len)
 	
 }
 
-u16 PD_Sampling(void)//70us
+u16 PD_Sampling(char SPI_Selectted)//70us
 {
 	u8 i;
 	for(i=0;i<AD_BUF_LEN;i++)
 	{
-		adBuf[i]=AD_SPI_Rd();
+		adBuf[i]=AD_SPI_Rd(SPI_Selectted);
 	}
 	
 	BubbleSort(adBuf,AD_BUF_LEN);//Ã°ÅÝÅÅÐò
@@ -176,6 +176,7 @@ void Control(void)//35us
 
 int main(void)
 {	
+	char SPI_Selectted = 1;
 	delay_init();
 	NVIC_Configuration();
 //	USART_Configuration();
@@ -184,7 +185,7 @@ int main(void)
  	ENCODER_Init();
 	AT24CXX_Init();
 	SPI_Init();
-	AD5422_Init();
+	AD5422_Init(SPI_Selectted);
 //	TFT_Init();
 //	TFT_SetColor(BLUE,YELLOW);
 //	TFT_ClrScr();
@@ -258,7 +259,17 @@ int main(void)
 			
 		//	delay_ms(1);
 			
-			AD_AVG=PD_Sampling();
+//			if (SPI_Selectted >= 2 ) 
+//			{
+//				SPI_Selectted = 1;
+//				printf("\r\n");
+//			} 
+//			else 
+//			{
+//				SPI_Selectted++;
+//			}
+			
+			AD_AVG=PD_Sampling(SPI_Selectted);
 			Control();
 //			Uart_Send_Float(mv);
 			printf("SV:%.3f\r\n",sv);
@@ -271,14 +282,12 @@ int main(void)
 			printf("\r\n");
 			
 			
-			delay_ms(1000);
-			
 		}	
 	}		 
 	
 }
 
-void TIM2_IRQHandler(void)
+void TIM2_IRQHandler(char SPI_Selectted)
 {
 	
 	if(TIM_GetITStatus(TIM2,TIM_IT_Update)==SET)
@@ -294,7 +303,7 @@ void TIM2_IRQHandler(void)
 //			delta2=(1-mv/mv_old)*(b*pv+c);
 //					Control();
 //					LED1_OFF;
-					DA_Wr(32767+DA_AMP);
+					DA_Wr(32767+DA_AMP,SPI_Selectted);
 //			
 					break;
 			case 1:
@@ -303,7 +312,7 @@ void TIM2_IRQHandler(void)
 //					Control();
 				//DA_AMP=16383;
 //					LED1_ON;
-					DA_Wr(32767-DA_AMP);
+					DA_Wr(32767-DA_AMP,SPI_Selectted);
 					break;
 			
 		}
